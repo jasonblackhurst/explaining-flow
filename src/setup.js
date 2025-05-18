@@ -42,11 +42,15 @@ function parseScenario(event) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = FormHelper.initialize();
+    const runButton = document.getElementById('create-scenario');
 
     document.getElementById('new-scenario')
       .addEventListener('submit', event => {
         event.preventDefault()
         if(!form.isValid()) return;
+
+        // Disable run button while simulation is running
+        runButton.disabled = true;
 
         const scenario = parseScenario(event);
         const $container = createScenarioContainer(scenario);
@@ -56,11 +60,15 @@ document.addEventListener('DOMContentLoaded', () => {
         $scenarios.insertBefore($container, $lastScenario);
 
         run(scenario);
+
+        // Re-enable run button when simulation is complete
+        PubSub.subscribe('board.done', () => {
+            runButton.disabled = false;
+        });
       })
 });
 
 const wipLimiter = LimitBoardWip();
-
 
 let lineChart = undefined;
 let cfd = undefined;
