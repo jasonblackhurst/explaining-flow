@@ -34,7 +34,8 @@ const initialize = (currentSenarioId) => {
       type: 'li',
       className: `post-it rotate-${rotation}`,
       attributes:{'data-card-id': item.id},
-      style: `background: ${item.color};`
+      style: `background: ${item.color};`,
+      text: item.id
     })
 
     let $column = document.querySelector(`[data-column-id="${column.id}"] .cards`);

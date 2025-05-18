@@ -57,46 +57,52 @@
 .post-it {
     /*position: relative;*/
     background: #feff9c;
-    box-shadow: 1px 1px 2px 1px rgba(9, 30, 66, .25);
-    border-radius: 3px;
-    width: 40px;
-    height: 40px;
-    padding: 10px;
-    margin: 10px;
+    box-shadow: 0 2px 4px rgba(9, 30, 66, .25);
+    border-radius: 8px;
+    width: 75px;
+    height: 27px;
+    padding: 7px;
+    margin: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    color: #172b4d;
 
     /* undo bootstrap reboot */
     box-sizing: content-box;
 }
 /*.todo .post-it,*/
 /*.done .post-it,*/
-.queue .post-it{
-    margin-top: -45px;
+.queue .post-it {
+    margin-top: -30px;
 }
-.queue .post-it:nth-child(1000n+1){
+.queue .post-it:nth-child(1000n+1) {
     margin-top: 0;
 }
+
+/* Remove all rotation classes since we want cards to be straight */
 .todo .rotate-none,
-.queue .rotate-none{
+.queue .rotate-none,
+.done .rotate-none,
+.todo .rotate-right,
+.queue .rotate-right,
+.done .rotate-right,
+.todo .rotate-left,
+.queue .rotate-left,
+.done .rotate-left,
+.todo .rotate-right-2,
+.queue .rotate-right-2,
+.done .rotate-right-2,
+.todo .rotate-left-2,
+.queue .rotate-left-2,
+.done .rotate-left-2 {
     transform: rotate(0deg);
 }
-.todo .rotate-right,
-.queue .rotate-right{
-    transform: rotate(2deg);
-}
-.todo .rotate-left,
-.queue .rotate-left{
-    transform: rotate(-2deg);
-}
-.todo .rotate-right-2,
-.queue .rotate-right-2{
-    transform: rotate(4deg);
-}
-.todo .rotate-left-2,
-.queue .rotate-left-2{
-    transform: rotate(-4deg);
-}
 
-.done .post-it:nth-child(5n+1){
+/* Remove the special stacking effects for done column */
+/*.done .post-it:nth-child(5n+1){
     z-index: 10;
 }
 .done .post-it:nth-child(5n+2){
@@ -119,11 +125,7 @@
     transform: rotate(-4deg);
     margin-top: -65px;
     z-index: 6;
-}
-
-
-
-
+}*/
 
 .scenario {
     list-style: none;
