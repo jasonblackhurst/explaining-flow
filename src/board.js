@@ -1,5 +1,6 @@
 const BoardFactory = require("./boardFactory");
 const PubSub = require("pubsub-js");
+const {resetWorkItemCounter} = require("./worker");
 
 const NoLimits = function () {
   return {
@@ -31,6 +32,7 @@ let Board = function (workColumnNames) {
   };
 
   function initialize(workColumnNames) {
+    resetWorkItemCounter();
     const factory = new BoardFactory();
     columns = factory.createColumns(workColumnNames);
     PubSub.publish('board.ready', {columns});

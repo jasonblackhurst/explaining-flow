@@ -58,6 +58,10 @@ function Worker(skills = {dev: 1}) {
 
 let workItemCounter = 1;
 
+function resetWorkItemCounter() {
+  workItemCounter = 1;
+}
+
 function WorkItem(work) {
   return {
     id: workItemCounter++,
@@ -109,4 +113,4 @@ function WorkList(skill = "dev") {
   return column;
 }
 
-module.exports = {Worker, WorkItem, WorkList};
+module.exports = {Worker, WorkItem, WorkList, resetWorkItemCounter};
