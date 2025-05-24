@@ -19,6 +19,8 @@ function createScenarioContainer(scenario) {
 
     const clone = template.content.cloneNode(true).querySelector('ul');
     clone.setAttribute('id', `scenario-${scenario.id}`);
+    clone.setAttribute('data-wip-limit', scenario.wipLimit || '');
+    clone.setAttribute('data-stories', scenario.stories?.amount || '');
     clone.querySelector('.scenario-title').textContent = scenario.title;
     return clone
 }
