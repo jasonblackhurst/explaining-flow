@@ -60,10 +60,16 @@ const initialize = (currentSenarioId) => {
 
   const renderWip = ({averageWip, maxWorkInProgress}) => {
     const wip = round(averageWip, 1);
-    if (wip === maxWorkInProgress) {
-      return wip;
+    let text = wip;
+    if (wip !== maxWorkInProgress) {
+      text = `${wip} (max ${maxWorkInProgress})`;
     }
-    return `${wip} (max ${maxWorkInProgress})`;
+    const scenarioContainer = document.querySelector(`${currentSenarioId}`);
+    const wipLimit = scenarioContainer ? scenarioContainer.getAttribute('data-wip-limit') : '';
+    if (wipLimit && !isNaN(Number(wipLimit))) {
+      text += ` (limit ${wipLimit})`;
+    }
+    return text;
   };
 
   const renderLeadTime = ({leadTime, minLeadTime, maxLeadTime}) => {
@@ -75,11 +81,21 @@ const initialize = (currentSenarioId) => {
     return `${value} (max ${max})`;
   };
 
+  const renderTimeWorked = (timeWorked) => {
+    const scenarioContainer = document.querySelector(`${currentSenarioId}`);
+    const stories = scenarioContainer ? scenarioContainer.getAttribute('data-stories') : '';
+    let text = round(timeWorked, 0);
+    if (stories && !isNaN(Number(stories))) {
+      text += ` (stories ${stories})`;
+    }
+    return text;
+  };
+
   PubSub.subscribe('stats.calculated', (topic, stats) => {
     document.querySelector(`${currentSenarioId} .throughput`).innerHTML = round(stats.throughput);
     document.querySelector(`${currentSenarioId} .leadtime`).innerHTML = renderLeadTime(stats)
     document.querySelector(`${currentSenarioId} .wip`).innerHTML = renderWip(stats)
-    document.querySelector(`${currentSenarioId} .timeWorked`).innerHTML = round(stats.timeWorked, 0);
+    document.querySelector(`${currentSenarioId} .timeWorked`).innerHTML = renderTimeWorked(stats.timeWorked)
   });
 
   PubSub.subscribe('worker.created', (topic, worker) => {
