@@ -6,8 +6,8 @@ function parseInput(rawInput) {
     const work = parseWorkload(rawInput.workload);
     const wipLimit = rawInput.wipLimit;
     const numberOfStories = parseInt(rawInput.numberOfStories || ((workers.length > 2) ? 200 : 50));
-    // Calculate speed so that all simulations take the same time as 200 items at speed 20
-    const speed = 20 * (numberOfStories / 200);
+    // Calculate speed with a minimum of 3
+    const speed = Math.max(3, numberOfStories / 10);
     let input = {
         title,
         workers,
