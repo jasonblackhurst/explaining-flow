@@ -67,8 +67,8 @@ describe('parseInput', () => {
   describe('only 2 workers provided', function() {
     let rawInputWith2Workers = {...exampleRawInput, workers: 'dev, qa'};
 
-    it('sets speed to 1', () => {
-      expect(parseInput(rawInputWith2Workers).speed).toEqual(1);
+    it('sets speed to 5', () => {
+      expect(parseInput(rawInputWith2Workers).speed).toEqual(5);
     });
 
     it('sets the number of stories to 50', () => {
@@ -79,8 +79,8 @@ describe('parseInput', () => {
   describe('20 stories requested', function() {
     let rawInputWith2Workers = {...exampleRawInput, numberOfStories: 20};
 
-    it('sets speed to 1', () => {
-      expect(parseInput(rawInputWith2Workers).speed).toEqual(1);
+    it('sets speed to 3', () => {
+      expect(parseInput(rawInputWith2Workers).speed).toEqual(3);
     });
 
     it('sets the number of stories to 20', () => {
@@ -91,8 +91,8 @@ describe('parseInput', () => {
   describe('100 stories requested', function() {
     let rawInputWith2Workers = {...exampleRawInput, numberOfStories: 100};
 
-    it('sets speed to 1', () => {
-      expect(parseInput(rawInputWith2Workers).speed).toEqual(20);
+    it('sets speed to 10', () => {
+      expect(parseInput(rawInputWith2Workers).speed).toEqual(10);
     });
 
     it('sets the number of stories to 100', () => {
