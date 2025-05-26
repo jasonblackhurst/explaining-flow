@@ -1,11 +1,18 @@
 const PubSub = require('pubsub-js');
 const {createElement} = require('./dom-manipulation')
+const TimeAdjustments = require('./timeAdjustments');
 
 const round = (number, positions = 2) => Math.round(number * Math.pow(10, positions)) / Math.pow(10, positions);
 const any = array => array[Math.floor(Math.random() * array.length)];
 
+// Track card times in each column
+const cardTimes = new Map();
+
 const initialize = (currentSenarioId) => {
   PubSub.subscribe('board.ready', (topic, {columns}) => {
+    // Clear times when starting new simulation
+    cardTimes.clear();
+    
     document.getElementById('board').innerHTML = ''
     let $scenario = document.querySelector(`${currentSenarioId} .workers`);
     if($scenario) $scenario.innerHTML = ''
@@ -30,6 +37,25 @@ const initialize = (currentSenarioId) => {
 
   PubSub.subscribe('workitem.added', (topic, {column, item}) => {
     const rotation = any(['left-2', 'left', 'none', 'right', 'right-2']);
+    
+    // Initialize or update card times
+    if (!cardTimes.has(item.id)) {
+      cardTimes.set(item.id, []);
+    }
+    const times = cardTimes.get(item.id);
+    times.push({
+      column: column.name, 
+      startTime: Date.now() / TimeAdjustments.multiplicator(),
+      work: item.work[column.necessarySkill] || 0
+    });
+
+    // Calculate final times for each column
+    const finalTimes = times.map(t => {
+      const endTime = t.endTime ? t.endTime / TimeAdjustments.multiplicator() : Date.now() / TimeAdjustments.multiplicator();
+      const seconds = Math.round((endTime - t.startTime) / 1000);
+      return `${t.column}: ${seconds} (work: ${t.work})`;
+    });
+
     let $card = createElement({
       type: 'li',
       className: `post-it rotate-${rotation}`,
@@ -43,6 +69,15 @@ const initialize = (currentSenarioId) => {
   });
 
   PubSub.subscribe('workitem.removed', (topic, {column, item}) => {
+    // Update the time for the column the card is leaving
+    const times = cardTimes.get(item.id);
+    if (times) {
+      const lastTime = times[times.length - 1];
+      if (lastTime && lastTime.column === column.name) {
+        lastTime.endTime = Date.now();
+      }
+    }
+
     let selector = `[data-column-id="${column.id}"] [data-card-id="${item.id}"]`;
     let $card = document.querySelector(selector);
     if ($card) $card.remove(); // FIXME: this check should not happen
