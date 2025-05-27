@@ -66,6 +66,8 @@ function WorkItem(work) {
   return {
     id: workItemCounter++,
     work,
+    startTime: Date.now() / TimeAdjustments.multiplicator(),
+    times: [],
     color: anyCardColor()
   };
 }
