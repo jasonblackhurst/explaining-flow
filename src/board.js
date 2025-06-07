@@ -1,6 +1,6 @@
-const BoardFactory = require("./boardFactory");
-const PubSub = require("pubsub-js");
-const {resetWorkItemCounter} = require("./worker");
+const BoardFactory = require('./boardFactory');
+const PubSub = require('pubsub-js');
+const {resetWorkItemCounter} = require('./worker');
 
 const NoLimits = function () {
   return {
@@ -90,7 +90,7 @@ let Board = function (workColumnNames) {
     }
   });
 
-  return board
+  return board;
 };
 
-module.exports = Board
+module.exports = Board;

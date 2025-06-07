@@ -1,6 +1,6 @@
 const PubSub = require('pubsub-js');
 const TimeAdjustments = require('./timeAdjustments');
-const {anyCardColor} = require("./Colors");
+const {anyCardColor} = require('./Colors');
 
 let workerCounter = 1;
 
@@ -22,7 +22,7 @@ function Worker(skills = {dev: 1}) {
 
   function renderName() {
     function renderSkills() {
-      return Object.keys(skills).map(skill => `${skill}`)
+      return Object.keys(skills).map(skill => `${skill}`);
     }
 
     return `${renderSkills()}`;
@@ -48,12 +48,12 @@ function Worker(skills = {dev: 1}) {
         idle = true;
         inProgress.move(outbox, item);
         PubSub.publish('worker.idle', worker);
-      }, timeout)
+      }, timeout);
     }
   }
 
   PubSub.publish('worker.created', worker);
-  return worker
+  return worker;
 }
 
 let workItemCounter = 1;
@@ -74,7 +74,7 @@ function WorkItem(work) {
 
 let workListCounter = 1;
 
-function WorkList(skill = "dev") {
+function WorkList(skill = 'dev') {
   let work = [];
   let id = workListCounter++;
 

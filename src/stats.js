@@ -61,7 +61,7 @@ function calculateThroughput(items) {
   if (elapsedTime < 100) {
     const minStartTime = items.map(item => item.startTime)
       .reduce((oldest, current) => oldest < current ? oldest : current);
-    elapsedTime = maxTime - minStartTime
+    elapsedTime = maxTime - minStartTime;
     return 1000 * items.length / elapsedTime;
   }
 
@@ -106,13 +106,13 @@ function initialize() {
   }
 
   PubSub.subscribe('board.ready', () => {
-    state = initialState()
+    state = initialState();
   });
 
   PubSub.subscribe('workitem.started', () => {
     state.runningWip.update(state.wip);
     state.wip++;
-    state.maxWip = Math.max(state.wip, state.maxWip)
+    state.maxWip = Math.max(state.wip, state.maxWip);
     publishStats();
   });
 
@@ -126,9 +126,9 @@ function initialize() {
     state.wip--;
     state.maxEndtime = Math.max(state.maxEndtime, item.endTime);
     state.minStarttime = Math.min(state.minStarttime, item.startTime);
-    state.maxLeadtime = Math.max(state.maxLeadtime, item.duration / 1000)
-    state.timeWorked = calculateDaysWorked()
-    state.sumOfDurations += (item.endTime - item.startTime)
+    state.maxLeadtime = Math.max(state.maxLeadtime, item.duration / 1000);
+    state.timeWorked = calculateDaysWorked();
+    state.sumOfDurations += (item.endTime - item.startTime);
     state.doneItems.push(item);
     publishStats();
   });

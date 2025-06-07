@@ -112,7 +112,7 @@ describe('animation', () => {
 
       expect(find('.throughput').innerHTML).toBe("1");
       expect(find('.leadtime').innerHTML).toBe("2");
-      expect(find('.wip').innerHTML).toBe("3 (max 4)");
+      expect(find('.wip').innerHTML).toBe("3 max:4");
       expect(find('.timeWorked').innerHTML).toBe("5");
     });
 

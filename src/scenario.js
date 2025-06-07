@@ -1,12 +1,12 @@
-const Board = require("./board");
-const {generateWorkItems} = require("./generator");
-const {Worker} = require('./worker')
+const Board = require('./board');
+const {generateWorkItems} = require('./generator');
+const {Worker} = require('./worker');
 
 let counter = 1;
 
 const Scenario = scenario => {
   const id = counter++;
-  const wipLimit = scenario.wipLimit || scenario.stories.amount
+  const wipLimit = scenario.wipLimit || scenario.stories.amount;
 
   const createWorker = ({ skills: skillNames }, speed = 1) => {
     let skills = {};
@@ -17,7 +17,7 @@ const Scenario = scenario => {
   const columnNames = () => Object.keys(scenario.stories.work);
 
   const generateStory = () => {
-    const story = {}
+    const story = {};
     let distribute = scenario.distribution || (identity => identity);
     columnNames().forEach(key => {
       let givenValue = scenario.stories.work[key];
@@ -28,12 +28,15 @@ const Scenario = scenario => {
 
   const run = () => {
     const board = new Board(columnNames());
-    board.addWorkers(...(scenario.workers.map(workerDetails => createWorker(workerDetails))));
-    board.addWorkItems(...generateWorkItems(generateStory, scenario.stories.amount));
-    return board;
-  }
+    const workers = scenario.workers.map(workerDetails => createWorker(workerDetails));
+    const workItems = generateWorkItems(generateStory, scenario.stories.amount);
+    board.addWorkers.apply(board, workers);
+    board.addWorkItems.apply(board, workItems);
+    this.board = Object.assign({}, board);
+    return this.board;
+  };
 
-  return {...scenario, run, id, wipLimit}
+  return Object.assign({}, scenario, { run, id, wipLimit });
 };
 
-module.exports = Scenario
+module.exports = Scenario;

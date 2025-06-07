@@ -7,16 +7,23 @@
     "test": "jest --env=jsdom",
     "test:watch": "jest --env=jsdom --watchAll",
     "refactor": "jest && npm run bundle && git commit --amend --no-edit -a || git reset --hard",
-    "bundle": "node bundle.js"
+    "bundle": "node bundle.js",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "browserify": "^17.0.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^7.2.1",
     "jest": "^24.8.0",
     "node-notifier": "^10.0.1",
-    "open": "^8.4.0"
+    "open": "^8.4.0",
+    "sonarqube-scanner": "^4.3.0"
   },
   "dependencies": {
     "chart.js": "^3.8.0",

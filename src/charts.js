@@ -1,5 +1,5 @@
 const Chart = require('chart.js');
-const PubSub = require("pubsub-js");
+const PubSub = require('pubsub-js');
 
 function createChart(ctx,speed) {
   const leadTime = [];
@@ -90,7 +90,7 @@ function LineChart($chart, updateInterval, speed) {
     const timerId = setInterval(() => state.chart.update(), updateInterval);
     PubSub.subscribe('board.done', () => {
       clearInterval(timerId);
-      state.chart.update()
+      state.chart.update();
     });
 
     PubSub.subscribe('stats.calculated', (topic, stats) => {
@@ -106,4 +106,4 @@ function LineChart($chart, updateInterval, speed) {
   return state.chart;
 }
 
-module.exports = LineChart
+module.exports = LineChart;

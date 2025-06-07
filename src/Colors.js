@@ -12,7 +12,7 @@ const cardColors = [
   '#E9E74A',
   '#FFDD2A',
   '#F9A55B',
-]
+];
 
 const any = array => array[Math.floor(Math.random() * array.length)];
 

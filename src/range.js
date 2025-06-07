@@ -3,4 +3,4 @@ function Range(from, to) {
   return Array.from(Array(length).keys()).map(value => value + from);
 }
 
-module.exports = Range
+module.exports = Range;

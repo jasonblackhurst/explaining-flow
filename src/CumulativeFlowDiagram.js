@@ -26,7 +26,7 @@ const {
   SubTitle
 } = require('chart.js');
 Chart.register(ArcElement, LineElement, BarElement, PointElement, BarController, BubbleController, DoughnutController, LineController, PieController, PolarAreaController, RadarController, ScatterController, CategoryScale, LinearScale, LogarithmicScale, RadialLinearScale, TimeScale, TimeSeriesScale, Decimation, Filler, Legend, Title, Tooltip, SubTitle);
-const PubSub = require("pubsub-js");
+const PubSub = require('pubsub-js');
 
 const distinct = (value, index, self) => self.indexOf(value) === index;
 
@@ -51,7 +51,7 @@ const colors = [
   '255, 205, 86',
   '255, 159, 64',
   '255, 99, 132',
-]
+];
 
 function nameOfColumn(column) {
   return column.name === '-'
@@ -98,29 +98,29 @@ function Cfd($chart, updateInterval, speed) {
       return (new Date() - start) * speed / 1000;
     }
 
-    const columns = {}
+    const columns = {};
     board.columns
       .map(nameOfColumn)
       .filter(distinct)
-      .forEach(name => columns[name] = 0)
+      .forEach(name => columns[name] = 0);
 
     chart.data.datasets = board.columns
       .map(nameOfColumn)
       .filter(distinct)
       .filter(c => c !== 'Backlog')
       .map((column, index) => createDataset(column, colors[index]))
-      .reverse()
+      .reverse();
 
     if (updateInterval) {
       const timerId = setInterval(() => chart.update(), updateInterval);
 
       PubSub.subscribe('board.done', () => {
         clearInterval(timerId);
-        chart.update()
+        chart.update();
       });
     } else {
       PubSub.subscribe('board.done', () => {
-        chart.update()
+        chart.update();
       });
     }
 
@@ -128,23 +128,23 @@ function Cfd($chart, updateInterval, speed) {
       const x = currentDate();
 
       const execute = () => {
-        const columnName = nameOfColumn(data.column)
+        const columnName = nameOfColumn(data.column);
         if (columnName === 'Backlog') {
-          columns[columnName]++
+          columns[columnName]++;
         } else {
           columns[columnName]++;
 
           const inboxName = nameOfColumn(data.column.inbox);
           columns[inboxName]--;
         }
-        chart.data.datasets.forEach(ds => ds.data.push({x, y: columns[ds.label]}))
+        chart.data.datasets.forEach(ds => ds.data.push({x, y: columns[ds.label]}));
       };
-      if (['Done'].includes(data.column.name)) execute()
+      if (['Done'].includes(data.column.name)) execute();
       if (data.column.type === 'work') execute();
     });
   });
 
-  return chart
+  return chart;
 }
 
-module.exports = Cfd
+module.exports = Cfd;

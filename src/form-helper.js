@@ -10,7 +10,7 @@ const validateWorkers = ({workload, workers}) => {
     const expectedWorkers = workload.split(',')
       .map(worker => worker.split(':')[0].trim());
 
-    return expectedWorkers.every(w => workers.includes(w))
+    return expectedWorkers.every(w => workers.includes(w));
   };
 
   return validateWorkersFormat() && validateWorkLoadCanBeExecuted();
@@ -42,7 +42,7 @@ const initialize = () => {
 
     if (validateWorkers(input)) {
       $workers.classList.remove('bg-warning');
-      $numberOfStories.setAttribute('placeholder', suggestNumberOfStories(input))
+      $numberOfStories.setAttribute('placeholder', suggestNumberOfStories(input));
     } else {
       $workers.classList.add('bg-warning');
     }
@@ -53,7 +53,7 @@ const initialize = () => {
       const input = values();
       return validateWork(input) && validateWorkers(input);
     },
-  }
+  };
 };
 
-module.exports = {initialize, validateWork, validateWorkers, suggestNumberOfStories}
+module.exports = {initialize, validateWork, validateWorkers, suggestNumberOfStories};

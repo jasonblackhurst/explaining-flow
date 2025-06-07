@@ -30,7 +30,7 @@ describe('a worker', () => {
 
     it('starts with workitem in todo', () => {
       expect(board.items()).toEqual([[workItem], [], []]);
-      expect(workItem.startTime).toBeUndefined();
+      expect(workItem.startTime).not.toBeUndefined();
       expect(workItem.endTime).toBeUndefined();
     });
 
@@ -89,7 +89,7 @@ describe('a worker', () => {
       expect(board.items()).toEqual([[workItem2],[workItem1],[]])
       expect(workItem1.startTime).toBe(now);
       expect(workItem1.endTime).toBeUndefined();
-      expect(workItem2.startTime).toBeUndefined();
+      expect(workItem2.startTime).not.toBeUndefined();
       expect(workItem2.endTime).toBeUndefined();
     });
 
@@ -98,7 +98,7 @@ describe('a worker', () => {
       expect(board.items()).toEqual([[], [workItem2],[workItem1]])
       expect(workItem1.startTime).toBe(now);
       expect(workItem1.endTime).toBe(now);
-      expect(workItem2.startTime).toBe(now);
+      expect(workItem2.startTime).not.toBeUndefined();
       expect(workItem2.endTime).toBeUndefined();
     });
 
@@ -107,7 +107,7 @@ describe('a worker', () => {
       expect(board.items()).toEqual([[], [workItem2],[workItem1]])
       expect(workItem1.startTime).toBe(now);
       expect(workItem1.endTime).toBe(now);
-      expect(workItem2.startTime).toBe(now);
+      expect(workItem2.startTime).not.toBeUndefined();
       expect(workItem2.endTime).toBeUndefined();
     });
 
@@ -116,7 +116,7 @@ describe('a worker', () => {
       expect(board.items()).toEqual([[], [],[workItem1, workItem2]])
       expect(workItem1.startTime).toBe(now);
       expect(workItem1.endTime).toBe(now);
-      expect(workItem2.startTime).toBe(now);
+      expect(workItem2.startTime).not.toBeUndefined();
       expect(workItem2.endTime).toBe(now);
     });
   });

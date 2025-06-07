@@ -1,8 +1,8 @@
-const {WorkList} = require("./worker");
+const {WorkList} = require('./worker');
 
 function BoardFactory() {
   const createColumns = workColumnNames => {
-    const columns = []
+    const columns = [];
 
     const workColumns = workColumnNames.map(name => new WorkList(name));
     columns.push(new WorkList('Backlog'));
@@ -29,7 +29,7 @@ function BoardFactory() {
       }
     }
 
-    todoColumn().type = 'todo'
+    todoColumn().type = 'todo';
     doneColumn().name = 'Done';
     doneColumn().type = 'done';
 
@@ -41,4 +41,4 @@ function BoardFactory() {
   };
 }
 
-module.exports = BoardFactory
+module.exports = BoardFactory;

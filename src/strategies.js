@@ -13,7 +13,7 @@ function LimitBoardWip() {
       wip--;
       if (wip < limit) PubSub.publish('board.allowNewWork', {wip, limit});
     });
-  }
+  };
 
   return {
     initialize
@@ -34,7 +34,7 @@ function DynamicLimitBoardWip() {
       counter++;
     if (counter >= 50) {
       counter = 0;
-      key = stats.sliding.leadTime(10) / stats.sliding.throughput(10);
+      const key = stats.sliding.leadTime(10) / stats.sliding.throughput(10);
       const newMeasurement = {limit: limiter.limit(), key};
       measurements.push(newMeasurement);
 
@@ -50,8 +50,8 @@ function DynamicLimitBoardWip() {
       if (bestMeasurement !== newMeasurement) {
         optimized = true;
         limiter.updateLimit(bestMeasurement.limit);
-        console.log({bestMeasurement})
-        console.log({measurements})
+        console.log({bestMeasurement});
+        console.log({measurements});
       } else {
         limiter.updateLimit(limiter.limit() + 1);
       }
@@ -80,4 +80,4 @@ function WipUp(step = 10) {
   return {};
 }
 
-module.exports = {LimitBoardWip, DynamicLimitBoardWip, WipUp}
+module.exports = {LimitBoardWip, DynamicLimitBoardWip, WipUp};

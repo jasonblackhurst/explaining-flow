@@ -10,9 +10,9 @@ function WorkerStats() {
     let idle = 0;
     for (let i = 0; i < history.length - 1; i++) {
       if (history[i].state === 'idle') {
-        idle += history[i + 1].timestamp - history[i].timestamp
+        idle += history[i + 1].timestamp - history[i].timestamp;
       } else {
-        working += history[i + 1].timestamp - history[i].timestamp
+        working += history[i + 1].timestamp - history[i].timestamp;
       }
     }
 
@@ -31,20 +31,20 @@ function WorkerStats() {
 
   PubSub.subscribe('worker.created', (topic, worker) => {
     workersHistory[worker.id] = [];
-    PubSub.publish('worker.stats.updated', calculateStatsFor(worker))
+    PubSub.publish('worker.stats.updated', calculateStatsFor(worker));
   });
 
   PubSub.subscribe('worker.idle', (topic, worker) => {
     workersHistory[worker.id].push({timestamp: Date.now(), state: 'idle'});
-    PubSub.publish('worker.stats.updated', calculateStatsFor(worker))
+    PubSub.publish('worker.stats.updated', calculateStatsFor(worker));
   });
 
   PubSub.subscribe('worker.working', (topic, worker) => {
     workersHistory[worker.id].push({timestamp: Date.now(), state: 'working'});
-    PubSub.publish('worker.stats.updated', calculateStatsFor(worker))
+    PubSub.publish('worker.stats.updated', calculateStatsFor(worker));
   });
 
-  return {}
+  return {};
 }
 
 module.exports = WorkerStats;
