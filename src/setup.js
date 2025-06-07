@@ -14,6 +14,9 @@ const {parseInput} = require("./parsing");
 const seedrandom = require('seedrandom');
 const FormHelper = require("./form-helper");
 
+// Store scenario data for replay
+const scenarioData = new Map();
+
 function createScenarioContainer(scenario) {
     const template = document.querySelector('#scenario-template');
 
@@ -22,7 +25,19 @@ function createScenarioContainer(scenario) {
     clone.setAttribute('data-wip-limit', scenario.wipLimit || '');
     clone.setAttribute('data-stories', scenario.stories?.amount || '');
     clone.querySelector('.scenario-title').textContent = scenario.title;
-    return clone
+
+    // Add replay button click handler
+    const replayBtn = clone.querySelector('.replay-btn');
+    if (replayBtn) {
+        replayBtn.addEventListener('click', () => {
+            const storedScenario = scenarioData.get(scenario.id);
+            if (storedScenario) {
+                run(storedScenario);
+            }
+        });
+    }
+
+    return clone;
 }
 
 function parse(form) {
@@ -78,8 +93,16 @@ let cfd = undefined;
 function run(scenario) {
     PubSub.clearAllSubscriptions();
 
-    // force predictable randomness across each simulationr
+    // force predictable randomness across each simulation
     seedrandom('limit work in progress', {global: true});
+
+    // Store scenario data for replay
+    scenarioData.set(scenario.id, scenario);
+
+    // Remove active class from all scenarios
+    document.querySelectorAll('.scenario.instance').forEach(el => el.classList.remove('active'));
+    // Add active class to current scenario
+    document.querySelector(`#scenario-${scenario.id}`).classList.add('active');
 
     Animation.initialize(`#scenario-${scenario.id}`);
     Stats.initialize();

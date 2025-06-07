@@ -95,12 +95,12 @@ const initialize = (currentSenarioId) => {
     const wip = round(averageWip, 1);
     let text = wip;
     if (wip !== maxWorkInProgress) {
-      text = `${wip} (max ${maxWorkInProgress})`;
+      text = `${wip} max:${maxWorkInProgress}`;
     }
     const scenarioContainer = document.querySelector(`${currentSenarioId}`);
     const wipLimit = scenarioContainer ? scenarioContainer.getAttribute('data-wip-limit') : '';
     if (wipLimit && !isNaN(Number(wipLimit))) {
-      text += ` (limit ${wipLimit})`;
+      text += ` limit:${wipLimit}`;
     }
     return text;
   };
@@ -111,7 +111,7 @@ const initialize = (currentSenarioId) => {
 
     if (!max) return value;
     if (value === max) return value;
-    return `${value} (max ${max})`;
+    return `${value} max:${max}`;
   };
 
   const renderTimeWorked = (timeWorked) => {
@@ -119,7 +119,7 @@ const initialize = (currentSenarioId) => {
     const stories = scenarioContainer ? scenarioContainer.getAttribute('data-stories') : '';
     let text = round(timeWorked, 0);
     if (stories && !isNaN(Number(stories))) {
-      text += ` (stories ${stories})`;
+      text += ` stories:${stories}`;
     }
     return text;
   };

@@ -160,3 +160,26 @@
 .chart {
     border: 1px solid lightgray;
 }
+
+.replay {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.replay-btn {
+    width: 100%;
+    font-size: 0.8em;
+    padding: 2px 8px;
+}
+
+.scenario.instance.active .throughput {
+    background-color: rgba(54, 162, 235, 0.2);
+}
+
+.scenario.instance.active .leadtime {
+    background-color: rgba(255, 99, 132, 0.2);
+}
+
+.scenario.instance.active .wip {
+    background-color: rgba(255, 206, 86, 0.2);
+}
