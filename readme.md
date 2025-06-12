@@ -275,3 +275,52 @@ This work is licensed under a
 [cc-by]: http://creativecommons.org/licenses/by/4.0/
 [cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png
 [cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
+
+## Code Quality with SonarQube
+
+This project uses SonarQube for code quality analysis. Here's how to set it up and use it:
+
+### Prerequisites
+- Java 17 or later
+- SonarQube Community Edition (free version)
+
+### Setup SonarQube
+1. Download SonarQube Community Edition from [SonarQube's website](https://www.sonarqube.org/downloads/)
+2. Extract it to a directory of your choice
+3. Start the SonarQube server:
+   ```bash
+   cd /path/to/sonarqube
+   ./bin/macosx-universal-64/sonar.sh start
+   ```
+4. Access SonarQube at http://localhost:9000
+   - Default credentials: admin/admin
+   - You'll be prompted to change the password on first login
+
+### Generate SonarQube Token
+1. Log in to SonarQube
+2. Go to Administration → Security → Users
+3. Click on your user
+4. Go to the "Tokens" tab
+5. Generate a new token and copy it
+
+### Set Up Environment Variable
+Add the token to your shell configuration to persist it across sessions:
+```bash
+echo "export SONAR_TOKEN=your-token" >> ~/.zshrc
+source ~/.zshrc
+```
+
+### Run Analysis
+Run the SonarQube analysis with:
+```bash
+npm run sonar
+```
+
+The analysis results will be available in your SonarQube dashboard at http://localhost:9000.
+
+### Configuration
+The project's SonarQube configuration is in `sonar-project.properties`. Key settings:
+- Source code location: `src`
+- Test files: `src` (with test file patterns)
+- Excluded directories: `node_modules`, `dist`
+- Coverage reports: `coverage/lcov.info`

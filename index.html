@@ -18,40 +18,40 @@
             <div class="col-auto">
                 <div class="input-group">
                     <div class="input-group-text">Work per story</div>
-                    <input class="form-control" type="text" id="workload" name="workload" value="pm: 1, dev: 4, qa: 1" placeholder="ux: 1, dev: 3, qa: 2">
+                    <input class="form-control" type="text" id="workload" name="workload" value="pm: 1, dev: 4, qa: 1" placeholder="ux: 1, dev: 3, qa: 2" data-testid="workload-input">
                 </div>
             </div>
 
             <div class="col-auto">
                 <div class="input-group">
                     <div class="input-group-text">Workers</div>
-                    <input class="form-control" type="text" id="workers" name="workers" value="pm, dev, dev, dev, dev, qa" placeholder="ux, dev, qa">
+                    <input class="form-control" type="text" id="workers" name="workers" value="pm, dev, dev, dev, dev, qa" placeholder="ux, dev, qa" data-testid="workers-input">
                 </div>
             </div>
 
             <div class="col-auto">
                 <div class="input-group">
                     <div class="input-group-text">WIP-limit</div>
-                    <input class="form-control" type="text" id="wip-limit" name="wip-limit" placeholder="none">
+                    <input class="form-control" type="text" id="wip-limit" name="wip-limit" placeholder="none" data-testid="wip-limit-input">
                 </div>
             </div>
 
             <div class="col-auto">
                 <div class="input-group">
                     <div class="input-group-text">#stories</div>
-                    <input class="form-control" type="text" id="numberOfStories" name="numberOfStories" value="200" placeholder="50">
+                    <input class="form-control" type="text" id="numberOfStories" name="numberOfStories" value="200" placeholder="50" data-testid="stories-input">
                 </div>
             </div>
 
             <div class="col-auto">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="random" name="random">
+                    <input class="form-check-input" type="checkbox" id="random" name="random" data-testid="variable-work-checkbox">
                     <label class="form-check-label" for="random">Variable work</label>
                 </div>
             </div>
 
             <div class="col-auto">
-                <button id="create-scenario" class="btn btn-primary">Run</button>
+                <button id="create-scenario" class="btn btn-primary" data-testid="run-button">Run</button>
             </div>
         </form>
     </div>

@@ -1,3 +1,43 @@
 node_modules
 dist/index.js
 .idea
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Build outputs
+/dist/
+bundle.js
+
+# IDE and Editor files
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs
+*.log
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# SonarQube
+.scannerwork/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
