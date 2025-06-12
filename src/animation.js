@@ -35,20 +35,6 @@ const initialize = (currentSenarioId) => {
     
     item.columnStartTime = Date.now() / TimeAdjustments.multiplicator();
 
-    //   // Initialize or update card times
-    //  item.times.push({
-    //     column: column.name, 
-    //     startTime: Date.now() / TimeAdjustments.multiplicator(),
-    //     work: item.work[column.necessarySkill] || 0
-    //   });
-
-    // // Calculate final times for each column
-    // const finalTimes = times.map(t => {
-    //   const endTime = t.endTime ? t.endTime / TimeAdjustments.multiplicator() : Date.now() / TimeAdjustments.multiplicator();
-    //   const seconds = Math.round((endTime - t.startTime) / 1000);
-    //   return `${t.column}: ${seconds} (work: ${t.work})`;
-    // });
-
     let $card = createElement({
       type: 'li',
       className: `post-it rotate-${rotation}`,
